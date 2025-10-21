@@ -4,14 +4,77 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  body {
-    @apply bg-neutral-900 text-white font-sans;
-  }
+body {
+  background-color: #161616 !important;
+  color: #ffffff !important;
+  font-family: 'Montserrat', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.light {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+body.light .text-white {
+  color: #000000 !important;
+}
+
+body.light .text-neutral-300 {
+  color: #666666 !important;
+}
+
+body.light * {
+  color: inherit;
 }
 
 
-@keyframes gradient-flow {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 100% 50%; }
+@keyframes background-change {
+  0% { 
+    background-image: url('/images/your-image-1.jpg');
+  }
+  10% { 
+    background-image: url('/images/your-image-2.jpg');
+  }
+  20% { 
+    background-image: url('/images/your-image-3.jpg');
+  }
+  30% { 
+    background-image: url('/images/your-image-4.jpg');
+  }
+  40% { 
+    background-image: url('/images/your-image-5.jpg');
+  }
+  50% { 
+    background-image: url('/images/your-image-6.jpg');
+  }
+  60% { 
+    background-image: url('/images/your-image-7.jpg');
+  }
+  70% { 
+    background-image: url('/images/your-image-8.jpg');
+  }
+  80% { 
+    background-image: url('/images/your-image-9.jpg');
+  }
+  90% { 
+    background-image: url('/images/your-image-10.jpg');
+  }
+  100% { 
+    background-image: url('/images/your-image-1.jpg');
+  }
+}
+
+h1 {
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: background-image 2s ease-in-out;
+  will-change: background-image;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }

@@ -1,6 +1,6 @@
-import { Search } from 'lucide-react'; // You still need to install this: npm install lucide-react
+import React from 'react';
+import { Sun, Moon } from 'lucide-react'; 
 
-// Set up navigation links
 const navLinks = [
   { name: "Home", href: "#" },
   { name: "About", href: "#" },
@@ -9,11 +9,24 @@ const navLinks = [
 ];
 
 function App() {
+  const [isDarkMode, setIsDarkMode] = React.useState(true);
+
+  const toggleDarkMode = () => {
+    const newMode = !isDarkMode;
+    setIsDarkMode(newMode);
+    
+    if (newMode) {
+      document.body.classList.remove('light');
+    } else {
+      document.body.classList.add('light');
+    }
+  };
+
   return (
-    <div className="font-['Montserrat',_sans-serif]">
+    <div className={`font-['Montserrat',_sans-serif] ${isDarkMode ? 'dark' : 'light'}`}>
       
       <header className="px-12 py-5 flex justify-between items-center">
-        <div className="text-2xl font-black tracking-wider">RANDON</div>
+        <div className="text-2xl font-black tracking-wider">GAURAV</div>
         <nav>
           <ul className="  flex">
             {navLinks.map((link) => (
@@ -25,29 +38,49 @@ function App() {
             ))}
           </ul>
         </nav>
-        <Search className="text-lg cursor-pointer" />
+        <button 
+          onClick={toggleDarkMode}
+          className="text-lg cursor-pointer hover:opacity-70 transition-opacity flex items-center gap-2"
+        >
+          {isDarkMode ? <Sun className="text-white" /> : <Moon className="text-white" />}
+          <span className="text-xs text-white"></span>
+        </button>
       </header>
 
       <main className="min-h-[80vh] flex flex-col justify-center items-center px-5">
-        
         <h1 className="
-          text-[15vw] lg:text-[12vw]
+          text-[15vw] lg:text-[8vw] xl:text-[6vw]
           font-black
           uppercase
           text-transparent
           bg-clip-text
+          tracking-[0.1em]
+          leading-tight
+          relative
+          overflow-hidden
           
-          /* These classes replace the tailwind.config.js file */
-          animate-[gradient-flow_10s_linear_infinite]
-          bg-[linear-gradient(90deg,#ff00a9,#ff4f4f,#ffee00,#4fffb5,#00a9ff,#ff00a9)]
-          bg-[size:400%_auto]
+          /* Background image animation */
+          animate-[background-change_60s_linear_infinite]
+          bg-[url('/images/your-image-1.jpg')]
+          bg-cover
+          bg-center
+          bg-no-repeat
         ">
           Gaurav
         </h1>
 
-        <p className="text-lg font-normal text-neutral-300 text-center mt-2">
-          Counselor to Traveler to Educator to Designer: Bridging the Gaps to Solve Complex Problems
+        <div className="flex flex-col items-center space-y-4 mt-6">
+        <p className="text-xl font-light text-neutral-300 tracking-wider">
+          <span className="animate-fadeIn inline-block mx-3 hover:text-emerald-400 transition-colors duration-300">Traveler</span>
+          <span className="text-neutral-500">•</span>
+          <span className="animate-fadeIn inline-block mx-3 hover:text-emerald-400 transition-colors duration-300">Entrepreneur</span>
+          <span className="text-neutral-500">•</span>
+          <span className="animate-fadeIn inline-block mx-3 hover:text-emerald-400 transition-colors duration-300">Designer</span>
         </p>
+        <p className="text-base font-light text-neutral-400 italic">
+          Creating, Solving, Innovating
+        </p>
+        </div>
       </main>
 
     </div>
