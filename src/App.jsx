@@ -1,6 +1,7 @@
 import React from "react";
 import { Sun, Moon } from "lucide-react";
 import TrueFocus from "./components/TrueFocus";
+import LightRays from "./components/LightRays";
 
 const navLinks = [
   { name: "Home", href: "#" },
@@ -30,7 +31,25 @@ function App() {
           isDarkMode ? "dark" : "light"
         }`}
       >
-        <header className="px-4 sm:px-8 lg:px-12 py-4 sm:py-5 flex justify-between items-center">
+        {/* LightRays background effect - positioned at the very top */}
+        <div className="fixed inset-0 w-full h-full pointer-events-none z-0">
+          <LightRays
+            raysOrigin="top-center"
+            raysColor={isDarkMode ? "#ffffff" : "#000000"}
+            raysSpeed={1.5}
+            lightSpread={1.2}
+            rayLength={2.5}
+            pulsating={true}
+            fadeDistance={0.8}
+            saturation={0.9}
+            followMouse={true}
+            mouseInfluence={0.15}
+            noiseAmount={0.1}
+            distortion={0.05}
+          />
+        </div>
+        
+        <header className="px-4 sm:px-8 lg:px-12 py-4 sm:py-5 flex justify-between items-center relative z-10">
           <div className="text-xl sm:text-2xl font-black tracking-wider">GAURAV</div>
           <nav className="hidden sm:block">
             <ul className="flex">
@@ -59,7 +78,7 @@ function App() {
           </button>
         </header>
 
-        <main className="min-h-[80vh] flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8">
+        <main className="min-h-[80vh] flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 relative z-10">
           <h1
             className="
           text-[12vw] sm:text-[10vw] md:text-[8vw] lg:text-[6vw] xl:text-[5vw]
