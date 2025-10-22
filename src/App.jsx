@@ -30,15 +30,15 @@ function App() {
           isDarkMode ? "dark" : "light"
         }`}
       >
-        <header className="px-12 py-5 flex justify-between items-center">
-          <div className="text-2xl font-black tracking-wider">GAURAV</div>
-          <nav>
-            <ul className="  flex">
+        <header className="px-4 sm:px-8 lg:px-12 py-4 sm:py-5 flex justify-between items-center">
+          <div className="text-xl sm:text-2xl font-black tracking-wider">GAURAV</div>
+          <nav className="hidden sm:block">
+            <ul className="flex">
               {navLinks.map((link) => (
-                <li key={link.name} className="mx-5">
+                <li key={link.name} className="mx-3 lg:mx-5">
                   <a
                     href={link.href}
-                    className=" text-sm font-normal text-white"
+                    className="text-sm font-normal text-white hover:opacity-70 transition-opacity"
                   >
                     {link.name}
                   </a>
@@ -59,18 +59,19 @@ function App() {
           </button>
         </header>
 
-        <main className="min-h-[80vh] flex flex-col justify-center items-center px-5">
+        <main className="min-h-[80vh] flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8">
           <h1
             className="
-          text-[15vw] lg:text-[8vw] xl:text-[6vw]
+          text-[12vw] sm:text-[10vw] md:text-[8vw] lg:text-[6vw] xl:text-[5vw]
           font-black
           uppercase
           text-transparent
           bg-clip-text
-          tracking-[0.1em]
+          tracking-[0.05em] sm:tracking-[0.1em]
           leading-tight
           relative
           overflow-hidden
+          text-center
           
           /* Background image animation */
           animate-[background-change_60s_linear_infinite]
@@ -83,14 +84,7 @@ function App() {
             Gaurav
           </h1>
 
-          <div className="flex flex-col items-center space-y-4 mt-6">
-            {/* <p className="text-xl font-light text-neutral-300 tracking-wider">
-          <span className="animate-fadeIn inline-block mx-3 hover:text-emerald-400 transition-colors duration-300">Traveler</span>
-          <span className="text-neutral-500">•</span>
-          <span className="animate-fadeIn inline-block mx-3 hover:text-emerald-400 transition-colors duration-300">Entrepreneur</span>
-          <span className="text-neutral-500">•</span>
-          <span className="animate-fadeIn inline-block mx-3 hover:text-emerald-400 transition-colors duration-300">Designer</span>
-        </p> */}
+          <div className="flex flex-col items-center space-y-4 mt-4 sm:mt-6 w-full max-w-4xl">
             <TrueFocus
               sentence="Traveler Entrepreneur Developer"
               manualMode={false}

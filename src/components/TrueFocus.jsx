@@ -25,11 +25,29 @@ const TrueFocus = ({
 
   useEffect(() => {
     if (!manualMode) {
+      // Ensure initial positioning on mobile
+      const initialTimeout = setTimeout(() => {
+        if (wordRefs.current[0] && containerRef.current) {
+          const parentRect = containerRef.current.getBoundingClientRect();
+          const activeRect = wordRefs.current[0].getBoundingClientRect();
+          
+          setFocusRect({
+            x: activeRect.left - parentRect.left,
+            y: activeRect.top - parentRect.top,
+            width: activeRect.width,
+            height: activeRect.height,
+          });
+        }
+      }, 100);
+
       const interval = setInterval(() => {
         setCurrentIndex((prev) => (prev + 1) % words.length);
       }, (animationDuration + pauseBetweenAnimations) * 1000);
 
-      return () => clearInterval(interval);
+      return () => {
+        clearTimeout(initialTimeout);
+        clearInterval(interval);
+      };
     }
   }, [manualMode, animationDuration, pauseBetweenAnimations, words.length]);
 
@@ -38,15 +56,21 @@ const TrueFocus = ({
 
     if (!wordRefs.current[currentIndex] || !containerRef.current) return;
 
-    const parentRect = containerRef.current.getBoundingClientRect();
-    const activeRect = wordRefs.current[currentIndex].getBoundingClientRect();
+    // Add a small delay to ensure DOM is ready, especially on mobile
+    const updateFocusRect = () => {
+      const parentRect = containerRef.current.getBoundingClientRect();
+      const activeRect = wordRefs.current[currentIndex].getBoundingClientRect();
 
-    setFocusRect({
-      x: activeRect.left - parentRect.left,
-      y: activeRect.top - parentRect.top,
-      width: activeRect.width,
-      height: activeRect.height,
-    });
+      setFocusRect({
+        x: activeRect.left - parentRect.left,
+        y: activeRect.top - parentRect.top,
+        width: activeRect.width,
+        height: activeRect.height,
+      });
+    };
+
+    // Use requestAnimationFrame for better mobile performance
+    requestAnimationFrame(updateFocusRect);
   }, [currentIndex, words.length]);
 
   const handleMouseEnter = (index) => {
@@ -104,10 +128,14 @@ const TrueFocus = ({
         }}
         transition={{
           duration: animationDuration,
+          ease: "easeInOut",
         }}
         style={{
           "--border-color": borderColor,
           "--glow-color": glowColor,
+        }}
+        initial={{
+          opacity: 0,
         }}
       >
         <span className="corner top-left"></span>

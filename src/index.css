@@ -78,3 +78,26 @@ h1 {
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  body {
+    font-size: 14px;
+  }
+  
+  h1 {
+    word-break: break-word;
+    hyphens: auto;
+  }
+}
+
+/* Touch-friendly interactions */
+@media (hover: none) and (pointer: coarse) {
+  .focus-word {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
